@@ -1,0 +1,98 @@
+version: '2'
+services:
+  elastic1:
+    build: elasticsearch/
+    container_name: elastic1
+    environment:
+      - node.name=elastic1
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    mem_limit: 1g
+    volumes:
+      - esdata1:/usr/share/elasticsearch/data
+      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    ports:
+      - 9200:9200
+      - 9300:9300
+    networks:
+      - esnet
+  elastic2:
+    build: elasticsearch/
+    container_name: elastic2
+    environment:
+      - node.name=elastic2
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "discovery.zen.ping.unicast.hosts=elastic1"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    mem_limit: 1g
+    volumes:
+      - esdata2:/usr/share/elasticsearch/data
+      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    networks:
+      - esnet
+  elastic3:
+    build: elasticsearch/
+    container_name: elastic3
+    environment:
+      - node.name=elastic3
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "discovery.zen.ping.unicast.hosts=elastic1"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    mem_limit: 1g
+    volumes:
+      - esdata3:/usr/share/elasticsearch/data
+      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    networks:
+      - esnet
+  kibana:
+    build: kibana/
+    container_name: elastic_kibana
+    volumes:
+      - ./kibana/config/:/usr/share/kibana/config
+    ports:
+      - 5601:5601
+    networks:
+      - esnet
+    depends_on:
+      - elastic1
+  logstash:
+    build: logstash/
+    container_name: elastic_logstash
+    volumes:
+      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
+      - ./logstash/pipeline:/usr/share/logstash/pipeline
+    ports:
+      - 5000:5000
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+    networks:
+      - esnet
+    depends_on:
+      - elastic1
+  elasticsearch-head:
+    image: mobz/elasticsearch-head:5
+    container_name: elastic_head
+    ports:
+      - 9100:9100
+    networks:
+      - esnet
+
+volumes:
+  esdata1:
+    driver: local
+  esdata2:
+    driver: local
+  esdata3:
+    driver: local
+
+networks:
+  esnet:
