@@ -1,0 +1,14 @@
+{ "index" : { "_index" : "catalog", "_type" : "books", "_id": "978-1617291623" } }
+{ "title": "Elasticsearch in Action", "categories": [{ "name": "analytics" },{ "name": "search" },{ "name": "database store" }], "publisher": "Manning", "description": "Elasticsearch in Action teaches you how to build scalable search applications using Elasticsearch. You'll ramp up fast, with an informative overview and an engaging introductory example. Within the first few chapters, you'll pick up the core concepts you need to implement basic searches and efficient indexing. With the fundamentals well in hand, you'll go on to gain an organized view of how to optimize your design. Perfect for developers and administrators building and managing search-oriented applications.", "published_date": "2015-12-05", "isbn": "978-1617291623", "rating": 5 }
+{ "index" : { "_index" : "catalog", "_type" : "books", "_id": "978-1617292774" } }
+{ "title": "Relevant Search: With applications for Solr and Elasticsearch", "categories": [{ "name": "search" }], "publisher": "Manning", "description": "Relevant Search demystifies relevance work. Using Elasticsearch, it teaches you how to return engaging search results to your users, helping you understand and leverage the internals of Lucene-based search engines.", "published_date": "2016-09-09", "isbn": "978-1617292774", "rating": 5 }
+{ "index" : { "_index" : "catalog", "_type" : "authors", "_id": "3", "_parent": "978-1617291623" } }
+{ "first_name": "Radu", "last_name": "Gheorghe" }
+{ "index" : { "_index" : "catalog", "_type" : "authors", "_id": "4", "_parent": "978-1617291623" } }
+{ "first_name": "Matthew", "last_name": "Lee Hinman" }
+{ "index" : { "_index" : "catalog", "_type" : "authors", "_id": "5", "_parent": "978-1617291623" } }
+{ "first_name": "Roy", "last_name": "Russo" }
+{ "index" : { "_index" : "catalog", "_type" : "authors", "_id": "6", "_parent": "978-1617292774" } }
+{ "first_name": "Doug", "last_name": "Turnbull" }
+{ "index" : { "_index" : "catalog", "_type" : "authors", "_id": "7", "_parent": "978-1617292774" } }
+{ "first_name": "John ", "last_name": "Berryman" }

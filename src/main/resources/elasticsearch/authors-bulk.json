@@ -1,0 +1,4 @@
+{ "index" : { "_index" : "catalog", "_type" : "authors", "_id": "1", "_parent": "978-1449358549" } }
+{ "first_name": "Clinton", "last_name": "Gormley" }
+{ "index" : { "_index" : "catalog", "_type" : "authors", "_id": "2", "_parent": "978-1449358549" } }
+{ "first_name": "Zachary", "last_name": "Tong" }
