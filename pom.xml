@@ -21,7 +21,7 @@
         <org.apache.lucene.version>6.4.0</org.apache.lucene.version>
         <net.logstash.logback.version>4.9</net.logstash.logback.version>
 
-        <docker.image.prefix>jgb</docker.image.prefix>
+        <docker.image.prefix>jlgonzalezbeltran</docker.image.prefix>
 
     </properties>
 
