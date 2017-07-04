@@ -12,7 +12,6 @@ import org.elasticsearch.client.Response;
 import org.elasticsearch.client.RestClient;
 import org.junit.Test;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -39,7 +38,7 @@ public class ElasticsearchRestApiTest {
         final Response response = restClient
                 .performRequest(HttpGet.METHOD_NAME, "_cluster/health", emptyMap());
 
-        final HashMap<String, Object> json = (LinkedHashMap) defaultConfiguration()
+        final LinkedHashMap json = (LinkedHashMap) defaultConfiguration()
                 .jsonProvider().parse(EntityUtils.toString(response.getEntity()));
 
         assertEquals(json.get("status"), "green");
@@ -87,7 +86,7 @@ public class ElasticsearchRestApiTest {
                 .performRequest(HttpPost.METHOD_NAME, "catalog/books/_search",
                         emptyMap(), payload);
 
-        final HashMap<String, Object> json = (LinkedHashMap) defaultConfiguration()
+        final LinkedHashMap json = (LinkedHashMap) defaultConfiguration()
                 .jsonProvider().parse(EntityUtils.toString(response.getEntity()));
 
         assertEquals(1, ((LinkedHashMap) json.get("hits")).get("total"));
