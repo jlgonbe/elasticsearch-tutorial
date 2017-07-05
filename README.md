@@ -1,12 +1,12 @@
-[<img src="https://static-www.elastic.co/assets/blt45b0886c90beceee/logo-elastic.svg" target="_blank" width=300/>](https://www.elastic.co) 
+<a href="https://www.elastic.co" target="_blank"><img src="https://static-www.elastic.co/assets/blt45b0886c90beceee/logo-elastic.svg" width=300/></a> 
 # elasticsearch tutorial
 
 ## prerequisites:
-- install [Docker](https://docs.docker.com/engine/installation/) & [Docker Compose](https://docs.docker.com/compose/install/)
-- install [httpie](https://httpie.org/) :: scripts for checking elasticsearch status use it
+- install <a href="https://docs.docker.com/engine/installation/" target="_blank">Docker</a> & <a href="https://docs.docker.com/compose/install/" target="_blank">Docker Compose</a>
+- install <a href="https://httpie.org/" target="_blank">httpie</a> :: scripts for checking elasticsearch status use it
 
 ## technologies:
-- docker && [docker-compose](https://docs.docker.com/compose/reference/overview/ "docker-compose CLI")
+- docker && <a href="https://docs.docker.com/compose/reference/overview/" target="_blank">docker-compose</a>
 - elasticsearch stack (elasticsearch, logstash, kibana) + plugin elasticsearch head
   - elasticsearch version :: 5.4.1
 - spring boot
@@ -18,8 +18,8 @@
 - Destroy cluster and the data volumes `docker-compose down -v`.
 
 ## elasticsearch APIs:
-- transport :: used in exposed ``_````_``endpoints
-- rest :: tested in ElasticSearchRestApiTest
+- transport :: used in exposed endpoints
+- rest :: tested in [ElasticSearchRestApiTest](https://github.com/jgb11/elasticsearch-tutorial/blob/feature/Readme_improve/src/test/java/jgb/elasticsearch/main/ElasticsearchRestApiTest.java)
 
 ## endpoints
 - **GET** _/elastic/health_ :: check elasticsearch health
@@ -73,3 +73,9 @@
   - **POST** _/demo_ :: create demo book in a single operation
 - /elastic/authors :: everything related with authors
   - **POST** _/demo_ :: create demo authors with bulk API
+  
+## scripts
+Inside folder [resources/elasticsearch/scripts](https://github.com/jgb11/elasticsearch-tutorial/tree/feature/Readme_improve/src/main/resources/elasticsearch) there are utilities scripts to:
+- check elasticsearch status
+- create sample indexes
+- perform some example queries 
