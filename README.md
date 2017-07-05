@@ -1,4 +1,4 @@
-[<img src="https://static-www.elastic.co/assets/blt45b0886c90beceee/logo-elastic.svg" style="width: 200px;"/>](https://www.elastic.co) 
+[<img src="https://static-www.elastic.co/assets/blt45b0886c90beceee/logo-elastic.svg" target="_blank" width=300/>](https://www.elastic.co) 
 # elasticsearch tutorial
 
 ## prerequisites:
