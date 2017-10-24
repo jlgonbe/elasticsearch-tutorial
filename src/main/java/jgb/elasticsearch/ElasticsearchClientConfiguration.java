@@ -1,9 +1,5 @@
 package jgb.elasticsearch;
 
-import org.apache.http.HttpHost;
-import org.apache.http.client.config.RequestConfig;
-import org.elasticsearch.client.RestClient;
-import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.cluster.ClusterName;
 import org.elasticsearch.common.settings.Settings;
@@ -26,8 +22,7 @@ public class ElasticsearchClientConfiguration {
         return new PreBuiltTransportClient(
                 Settings.builder()
                         .put(ClusterName.CLUSTER_NAME_SETTING.getKey(), "es-catalog")
-                        .build()
-        ).addTransportAddress(new InetSocketTransportAddress(
-                InetAddress.getByName("localhost"), 9300));
+                        .build())
+                .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("localhost"), 9300));
     }
 }

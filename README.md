@@ -5,10 +5,18 @@
 - install <a href="https://docs.docker.com/engine/installation/" target="_blank">Docker</a> & <a href="https://docs.docker.com/compose/install/" target="_blank">Docker Compose</a>
 - install <a href="https://httpie.org/" target="_blank">httpie</a> :: scripts for checking elasticsearch status use it
 
+(linux)
+- modify vm.max_map_count in /etc/sysctl.conf:
+```sudo vi /etc/sysctl.conf```
+- add at the end 'vm.max_map_count=262144'
+or
+- for a runtime change:
+```sudo sysctl -w vm.max_map_count=262144```
+
 ## technologies:
 - docker && <a href="https://docs.docker.com/compose/reference/overview/" target="_blank">docker-compose</a>
 - elasticsearch stack (elasticsearch, logstash, kibana) + plugin elasticsearch head
-  - elasticsearch version :: 5.4.1
+  - elasticsearch version :: 5.6.3
 - spring boot
 - junit
 
@@ -25,7 +33,7 @@
 - **GET** _/elastic/health_ :: check elasticsearch health
 - _/elastic/index_ :: everything related with index management
   - **GET** _/{indexName}/exists_ :: check if {indexName} exists
-  - **POST** _/catalog_ :: create index catalog with this configuration:
+  - **POST** _/catalog_ :: create index catalog with this mappings:
 ```json
 { 
   "settings": {
@@ -71,7 +79,7 @@
   - **GET** _/count_ :: count existing books
   - **GET** _/count/rating/{rating}_ :: count books with indicated {rating}
   - **POST** _/demo_ :: create demo book in a single operation
-- /elastic/authors :: everything related with authors
+- _/elastic/authors_ :: everything related with authors
   - **POST** _/demo_ :: create demo authors with bulk API
   
 ## scripts

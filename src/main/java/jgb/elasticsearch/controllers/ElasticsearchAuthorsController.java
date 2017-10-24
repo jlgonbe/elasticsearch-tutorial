@@ -1,9 +1,7 @@
 package jgb.elasticsearch.controllers;
 
 import jgb.elasticsearch.utils.Constants;
-import org.apache.log4j.Logger;
 import org.elasticsearch.action.DocWriteRequest;
-import org.elasticsearch.action.admin.cluster.health.ClusterHealthResponse;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.support.WriteRequest;
@@ -12,9 +10,9 @@ import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.json.JsonXContent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +31,7 @@ import java.util.UUID;
 @RequestMapping("/elastic/authors")
 public class ElasticsearchAuthorsController {
 
-    private static final Logger LOG = Logger.getLogger(ElasticsearchAuthorsController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ElasticsearchAuthorsController.class);
 
     @Autowired
     private TransportClient client;

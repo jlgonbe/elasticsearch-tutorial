@@ -10,6 +10,7 @@ import org.apache.http.nio.entity.NStringEntity;
 import org.apache.http.util.EntityUtils;
 import org.elasticsearch.client.Response;
 import org.elasticsearch.client.RestClient;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.LinkedHashMap;
@@ -45,6 +46,7 @@ public class ElasticsearchRestApiTest {
     }
 
     @Test
+    @Ignore
     public void testQueryToElastic() throws Exception {
         final Map<String, Object> authors = new LinkedHashMap<>();
         authors.put("type", "authors");
