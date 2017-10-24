@@ -1,9 +1,10 @@
 package jgb.elasticsearch.controllers;
 
-import org.apache.log4j.Logger;
 import org.elasticsearch.action.admin.cluster.health.ClusterHealthResponse;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.unit.TimeValue;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/elastic/health")
 public class ElasticsearchHealthController {
 
-    private static final Logger LOG = Logger.getLogger(ElasticsearchHealthController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ElasticsearchHealthController.class);
 
     @Autowired
     private TransportClient client;

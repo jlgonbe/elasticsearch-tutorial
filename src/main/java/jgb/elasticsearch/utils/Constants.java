@@ -5,7 +5,15 @@ package jgb.elasticsearch.utils;
  * @since 04/07/2017 | 19:16
  */
 public class Constants {
+
+    private Constants() {
+    }
+
     public static class Elastic {
+
+        private Elastic() {
+        }
+
         public static final String INDEX_CATALOG = "catalog";
         public static final String TYPE_BOOKS = "books";
         public static final String TYPE_AUTHORS = "authors";
