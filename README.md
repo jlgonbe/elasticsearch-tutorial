@@ -9,6 +9,7 @@
 - modify vm.max_map_count in /etc/sysctl.conf:
 ```sudo vi /etc/sysctl.conf```
 - add at the end 'vm.max_map_count=262144'
+
 or
 - for a runtime change:
 ```sudo sysctl -w vm.max_map_count=262144```
