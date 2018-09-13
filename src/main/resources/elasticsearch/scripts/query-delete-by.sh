@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-curl -i http://localhost:9200/catalog/books/_delete_by_query?pretty -d '
+curl -i -H 'Content-Type: application/json' http://localhost:9200/books/books/_delete_by_query?pretty -d '
 {
    "query": {
       "bool": {

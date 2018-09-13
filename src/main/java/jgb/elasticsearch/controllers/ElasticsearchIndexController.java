@@ -32,7 +32,7 @@ public class ElasticsearchIndexController {
 
     @Autowired
     private TransportClient client;
-    @Value("classpath:elasticsearch/catalog-index.json")
+    @Value("classpath:elasticsearch/authors-index.json")
     private Resource index;
 
     @RequestMapping(value = "/{indexName}/exists", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

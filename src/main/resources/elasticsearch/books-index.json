@@ -23,15 +23,6 @@
         "published_date": { "type": "date" },
         "isbn": { "type": "keyword" },
         "rating": { "type": "byte" }
-       }
-   },
-   "authors": {
-     "properties": {
-       "first_name": { "type": "keyword" },
-       "last_name": { "type": "keyword" }
-     },
-     "_parent": {
-        "type": "books"
       }
     }
   }
