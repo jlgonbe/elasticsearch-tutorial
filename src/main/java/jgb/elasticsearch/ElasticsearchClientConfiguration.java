@@ -3,7 +3,7 @@ package jgb.elasticsearch;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.cluster.ClusterName;
 import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.common.transport.InetSocketTransportAddress;
+import org.elasticsearch.common.transport.TransportAddress;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,6 +23,6 @@ public class ElasticsearchClientConfiguration {
                 Settings.builder()
                         .put(ClusterName.CLUSTER_NAME_SETTING.getKey(), "es-catalog")
                         .build())
-                .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("localhost"), 9300));
+                .addTransportAddress(new TransportAddress(InetAddress.getByName("localhost"), 9300));
     }
 }

@@ -44,9 +44,9 @@ public class ElasticsearchBooksController {
     @RequestMapping(value = "/count", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Long> getNumberOfBooks() {
         final SearchResponse response = client
-                .prepareSearch(Constants.Elastic.INDEX_CATALOG)
+                .prepareSearch(Constants.Elastic.INDEX_BOOKS)
                 .setTypes(Constants.Elastic.TYPE_BOOKS)
-                .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
+                .setSearchType(SearchType.QUERY_THEN_FETCH)
                 .setQuery(QueryBuilders.matchAllQuery())
                 .setFrom(0)
                 .setSize(10)
@@ -71,17 +71,10 @@ public class ElasticsearchBooksController {
                                 QueryBuilders.matchQuery(Constants.Elastic.FIELD_CATEGORIES_NAME, "analytics"),
                                 ScoreMode.Total
                         )
-                )
-                .must(QueryBuilders
-                        .hasChildQuery(
-                                Constants.Elastic.TYPE_AUTHORS,
-                                QueryBuilders.termQuery(Constants.Elastic.FIELD_LAST_NAME, "Gormley"),
-                                ScoreMode.Total
-                        )
                 );
 
         final SearchResponse response = client
-                .prepareSearch(Constants.Elastic.INDEX_CATALOG)
+                .prepareSearch(Constants.Elastic.INDEX_BOOKS)
                 .setTypes(Constants.Elastic.TYPE_BOOKS)
                 .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
                 .setQuery(query)
@@ -106,7 +99,7 @@ public class ElasticsearchBooksController {
             final XContentBuilder source = getSource(isbn);
 
             client
-                    .prepareIndex(Constants.Elastic.INDEX_CATALOG, Constants.Elastic.TYPE_BOOKS)
+                    .prepareIndex(Constants.Elastic.INDEX_BOOKS, Constants.Elastic.TYPE_BOOKS)
                     .setId(isbn)
                     .setSource(source)
                     .setOpType(DocWriteRequest.OpType.INDEX)

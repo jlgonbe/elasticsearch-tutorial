@@ -7,6 +7,7 @@ import org.elasticsearch.action.admin.indices.exists.indices.IndicesExistsRespon
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.io.Streams;
 import org.elasticsearch.common.unit.TimeValue;
+import org.elasticsearch.common.xcontent.XContentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -33,7 +34,9 @@ public class ElasticsearchIndexController {
     @Autowired
     private TransportClient client;
     @Value("classpath:elasticsearch/authors-index.json")
-    private Resource index;
+    private Resource authorsIndex;
+    @Value("classpath:elasticsearch/books-index.json")
+    private Resource booksIndex;
 
     @RequestMapping(value = "/{indexName}/exists", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<IndicesExistsResponse> indexExists(@PathVariable String indexName) {
@@ -47,21 +50,42 @@ public class ElasticsearchIndexController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/catalog", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CreateIndexResponse> createIndexCatalog() {
+    @RequestMapping(value = "/authors", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<CreateIndexResponse> createIndexAuthors() {
         try (final ByteArrayOutputStream out = new ByteArrayOutputStream()) {
-            Streams.copy(index.getInputStream(), out);
+            Streams.copy(authorsIndex.getInputStream(), out);
 
-            final CreateIndexResponse response = client
+            final CreateIndexResponse responseAuthorsIndex = client
                     .admin()
                     .indices()
-                    .prepareCreate(Constants.Elastic.INDEX_CATALOG)
-                    .setSource(out.toByteArray())
+                    .prepareCreate(Constants.Elastic.INDEX_AUTHORS)
+                    .setSource(out.toByteArray(), XContentType.JSON)
                     .setTimeout(TimeValue.timeValueSeconds(1))
                     .get(TimeValue.timeValueSeconds(2));
 
-            LOG.info("Success creating index: " + response.isShardsAcked());
-            return new ResponseEntity<>(response, HttpStatus.CREATED);
+            LOG.info("Success creating authorsIndex: " + responseAuthorsIndex.isAcknowledged());
+            return new ResponseEntity<>(responseAuthorsIndex, HttpStatus.CREATED);
+        } catch (Exception e) {
+            LOG.error("Exception.", e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @RequestMapping(value = "/books", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<CreateIndexResponse> createIndexBooks() {
+        try (final ByteArrayOutputStream out = new ByteArrayOutputStream()) {
+            Streams.copy(booksIndex.getInputStream(), out);
+
+            final CreateIndexResponse responseBooksIndex = client
+                    .admin()
+                    .indices()
+                    .prepareCreate(Constants.Elastic.INDEX_BOOKS)
+                    .setSource(out.toByteArray(), XContentType.JSON)
+                    .setTimeout(TimeValue.timeValueSeconds(1))
+                    .get(TimeValue.timeValueSeconds(2));
+
+            LOG.info("Success creating booksIndex: " + responseBooksIndex.isAcknowledged());
+            return new ResponseEntity<>(responseBooksIndex, HttpStatus.CREATED);
         } catch (Exception e) {
             LOG.error("Exception.", e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

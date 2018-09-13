@@ -14,7 +14,8 @@ public class Constants {
         private Elastic() {
         }
 
-        public static final String INDEX_CATALOG = "catalog";
+        public static final String INDEX_BOOKS = "books";
+        public static final String INDEX_AUTHORS = "authors";
         public static final String TYPE_BOOKS = "books";
         public static final String TYPE_AUTHORS = "authors";
         public static final String FIELD_TITLE = "title";
