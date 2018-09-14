@@ -69,7 +69,7 @@ public class ElasticsearchAuthorsController {
 
     private IndexRequest getRequestAuthor(XContentBuilder xContentBuilder, String isbn) {
         return Requests
-                .indexRequest(Constants.Elastic.INDEX_CATALOG)
+                .indexRequest(Constants.Elastic.INDEX_AUTHORS)
                 .type(Constants.Elastic.TYPE_AUTHORS)
                 .id(UUID.randomUUID().toString())
                 .source(xContentBuilder)

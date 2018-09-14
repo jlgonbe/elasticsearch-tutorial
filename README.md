@@ -16,15 +16,15 @@ or
 
 ## technologies:
 - docker && <a href="https://docs.docker.com/compose/reference/overview/" target="_blank">docker-compose</a>
-- elasticsearch stack (elasticsearch, logstash, kibana) + plugin elasticsearch head
-  - elasticsearch version :: 5.6.3
+- elasticsearch stack (elasticsearch, logstash, kibana)
+  - elasticsearch version :: 6.4.0
 - spring boot
 - junit
 
 ## elasticsearch stack:
 - Start cluster `docker-compose up -d`.
 - Stop cluster `docker-compose down`. Data volumes will persist, so it’s possible to start the cluster again with the same data.
-- Destroy cluster and the data volumes `docker-compose down -v`.
+- Destroy cluster and data volumes `docker-compose down -v`.
 
 ## elasticsearch APIs:
 - transport :: used in exposed endpoints
@@ -34,13 +34,35 @@ or
 - **GET** _/elastic/health_ :: check elasticsearch health
 - _/elastic/index_ :: everything related with index management
   - **GET** _/{indexName}/exists_ :: check if {indexName} exists
-  - **POST** _/catalog_ :: create index catalog with this mappings:
+  - **POST** _/authors_ :: create index authors with this mappings:
 ```json
 { 
   "settings": {
     "index" : {
       "number_of_shards" : 5, 
       "number_of_replicas" : 2 
+    }
+  },
+  "mappings": {
+    "authors": {
+      "properties": {
+        "first_name": { "type": "keyword" },
+        "last_name": { "type": "keyword" }
+      },
+      "_parent": {
+         "type": "books"
+       }
+    }
+  }
+}
+```
+  - **POST** _/books_ :: create index authors with this mappings:
+```json
+{
+  "settings": {
+    "index" : {
+      "number_of_shards" : 5,
+      "number_of_replicas" : 2
     }
   },
   "mappings": {
@@ -62,15 +84,6 @@ or
         "isbn": { "type": "keyword" },
         "rating": { "type": "byte" }
        }
-   },
-   "authors": {
-     "properties": {
-       "first_name": { "type": "keyword" },
-       "last_name": { "type": "keyword" }
-     },
-     "_parent": {
-        "type": "books"
-      }
     }
   }
 }
@@ -84,7 +97,7 @@ or
   - **POST** _/demo_ :: create demo authors with bulk API
   
 ## scripts
-Inside folder [resources/elasticsearch/scripts](https://github.com/jgb11/elasticsearch-tutorial/tree/feature/Readme_improve/src/main/resources/elasticsearch) there are utilities scripts to:
+Inside folder [resources/elasticsearch/scripts](https://github.com/jgb11/elasticsearch-tutorial/tree/feature/Readme_improve/src/main/resources/elasticsearch) there are utility scripts to:
 - check elasticsearch status
 - create sample indexes
 - perform some example queries 
