@@ -78,13 +78,6 @@ services:
       - esnet
     depends_on:
       - elastic1
-  elasticsearch-head:
-    image: mobz/elasticsearch-head:5
-    container_name: elastic_head
-    ports:
-      - 9100:9100
-    networks:
-      - esnet
 
 volumes:
   esdata1:
